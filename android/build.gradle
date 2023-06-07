@@ -13,6 +13,14 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            def requested = details.requested
+                if (requested.group == 'androidx.core' && requested.name == 'core') {
+                details.useVersion '1.10.1'
+                }
+            }
+        }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.3.1")
